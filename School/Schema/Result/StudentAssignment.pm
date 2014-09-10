@@ -20,9 +20,19 @@ __PACKAGE__->add_columns(
         is_numeric        => 1,
         is_foreign_key    => 1,
     },
+    grade_id => {
+        data_type         => 'integer',
+        is_nullable       => 0,
+        is_numeric        => 1,
+        is_foreign_key    => 1,
+    },
 );
 __PACKAGE__->set_primary_key(qw( student_id assignment_id ));
 __PACKAGE__->belongs_to(student_id    => 'School::Schema::Result::Student');
 __PACKAGE__->belongs_to(assignment_id => 'School::Schema::Result::Assignment');
+__PACKAGE__->has_one(
+    grade_id => 'School::Schema::Result::Grade',
+    { 'foreign.id' => 'self.grade_id' }
+);
 
 1;

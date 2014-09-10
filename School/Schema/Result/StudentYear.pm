@@ -33,7 +33,10 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key(qw( student_id year ));
 __PACKAGE__->belongs_to(student_id => 'School::Schema::Result::Student');
-#__PACKAGE__->has_one(   gpa        => 'School::Schema::Result::Grade');
+__PACKAGE__->has_one(
+    gpa => 'School::Schema::Result::Grade',
+    { 'foreign.id' => 'self.gpa' }
+);
 
 1;
 
