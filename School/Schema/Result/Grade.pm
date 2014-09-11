@@ -28,8 +28,6 @@ __PACKAGE__->add_columns(
     },
 );
 __PACKAGE__->set_primary_key('id');
-__PACKAGE__->belongs_to(assignments => 'School::Schema::Result::Assignment', 'id');
-__PACKAGE__->belongs_to(students    => 'School::Schema::Result::Student', 'id');
 
 1;
 
@@ -41,13 +39,15 @@ __PACKAGE__->belongs_to(students    => 'School::Schema::Result::Student', 'id');
 
 =item * Because a Grade exists independent of any other table, Grade
 has zero relationships. (Technically, StudentAssignment,
-StudentClass, and StudentGradeLevel all have a Grade.)
+StudentClass, and StudentGradeLevel all have a Grade but Grade is not
+associated with any of those tables.)
 
 =item * Business logic should limit value >= 0 && value <= 100. This
 implies there can be at most 101 entries in the 'grade' table.
 
 =item * Business logic should limit status >= 0 && status <= 2. The
 values mean: 0 - undefined, 1 - incomplete, 2 - Grade.value assigned.
+Grade.value is therefore only valid when Grade.status == 2.
 
 =back
 

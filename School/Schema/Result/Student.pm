@@ -24,7 +24,13 @@ __PACKAGE__->add_columns(
         is_numeric        => 0,
         is_nullable       => 0,
     },
-    grade_affinity => {
+    grade_level_id => {
+        data_type         => 'integer',
+        is_nullable       => 0,
+        is_numeric        => 1,
+        is_foreign_key    => 1,
+    },
+    gpa => {
         data_type         => 'integer',
         is_nullable       => 0,
         is_numeric        => 1,
@@ -32,6 +38,30 @@ __PACKAGE__->add_columns(
     },
 );
 __PACKAGE__->set_primary_key('id');
-__PACKAGE__->belongs_to(classes     => 'School::Schema::Result::Class',      'id');
+__PACKAGE__->belongs_to(grade_levels => 'School::Schema::Result::GradeLevel', 'grade_level_id');
+__PACKAGE__->has_many(
+    student_assignments => 'School::Schema::Result::StudentAssignment',
+    'student_id'
+);
+__PACKAGE__->has_many(
+    student_classes => 'School::Schema::Result::StudentClass',
+    'student_id'
+);
+__PACKAGE__->many_to_many( assignments => 'student_assignments', 'assignment_id');
+__PACKAGE__->many_to_many( classes     => 'student_classes',     'class_id');
 
 1;
+
+=pod
+
+=head1 NOTES
+
+=over 4
+
+=item * 'surname' (family name) is used for sorting students by name.
+In the event that a student has but a single name (like 'Madonna'),
+both 'surname' and 'name' would contain the same value.
+
+=back
+
+=cut

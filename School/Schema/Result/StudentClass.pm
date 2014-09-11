@@ -26,6 +26,11 @@ __PACKAGE__->add_columns(
         is_numeric        => 1,
         is_foreign_key    => 1,
     },
+    override_grade_id => {
+        data_type         => 'integer',
+        is_nullable       => 0,
+        is_numeric        => 1,
+    },
 );
 __PACKAGE__->set_primary_key(qw( student_id class_id ));
 __PACKAGE__->belongs_to(student_id => 'School::Schema::Result::Student');
@@ -36,3 +41,17 @@ __PACKAGE__->has_one(
 );
 
 1;
+
+=pod
+
+=head1 NOTES
+
+=over 4
+
+=item * Business logic should use 'override_grade_id' to indicate
+that student 'student_id' can take class 'class_id' even though
+that class is not in that student's grade level.
+
+=back
+
+=cut

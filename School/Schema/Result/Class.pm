@@ -27,7 +27,14 @@ __PACKAGE__->add_columns(
     },
 );
 __PACKAGE__->set_primary_key('id');
-__PACKAGE__->has_many(  students    => 'School::Schema::Result::Student',    'id');
-__PACKAGE__->belongs_to(grade_level => 'School::Schema::Result::GradeLevel', 'id');
+__PACKAGE__->belongs_to(grade_level => 'School::Schema::Result::GradeLevel', 'grade_level_id');
+__PACKAGE__->has_many(
+    student_classes => 'School::Schema::Result::StudentClass',
+    'class_id'
+);
+__PACKAGE__->many_to_many(
+    students => 'student_classes',
+    'student_id'
+);
 
 1;

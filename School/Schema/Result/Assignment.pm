@@ -50,7 +50,15 @@ __PACKAGE__->add_columns(
     },
 );
 __PACKAGE__->set_primary_key('id');
-__PACKAGE__->belongs_to(classes => 'School::Schema::Result::Class', 'id');
+__PACKAGE__->belongs_to(classes => 'School::Schema::Result::Class', 'class_id');
+__PACKAGE__->has_many(
+    student_assignments => 'School::Schema::Result::StudentAssignment',
+    'assignment_id'
+);
+__PACKAGE__->many_to_many(
+    students => 'student_assignments',
+    'student_id'
+);
 
 1;
 

@@ -26,7 +26,7 @@ __PACKAGE__->add_columns(
     },
 );
 __PACKAGE__->set_primary_key('id');
-__PACKAGE__->has_many(classes => 'School::Schema::Result::Class', 'id');
+__PACKAGE__->has_many(classes => 'School::Schema::Result::Class', 'grade_level_id');
 
 1;
 
