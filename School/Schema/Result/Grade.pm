@@ -40,7 +40,7 @@ __PACKAGE__->set_primary_key('id');
 =item * Because a Grade exists independent of any other table, Grade
 has zero relationships. (Technically, StudentAssignment,
 StudentClass, and StudentGradeLevel all have a Grade but Grade is not
-associated with any of those tables.)
+linked only with any of those tables.)
 
 =item * Business logic should limit value >= 0 && value <= 100. This
 implies there can be at most 101 entries in the 'grade' table.

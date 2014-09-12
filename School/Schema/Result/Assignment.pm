@@ -55,10 +55,7 @@ __PACKAGE__->has_many(
     student_assignments => 'School::Schema::Result::StudentAssignment',
     'assignment_id'
 );
-__PACKAGE__->many_to_many(
-    students => 'student_assignments',
-    'student_id'
-);
+__PACKAGE__->many_to_many(students => 'student_assignments', 'student_id');
 
 1;
 

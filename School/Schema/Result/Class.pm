@@ -32,9 +32,6 @@ __PACKAGE__->has_many(
     student_classes => 'School::Schema::Result::StudentClass',
     'class_id'
 );
-__PACKAGE__->many_to_many(
-    students => 'student_classes',
-    'student_id'
-);
+__PACKAGE__->many_to_many(students => 'student_classes', 'student_id');
 
 1;
