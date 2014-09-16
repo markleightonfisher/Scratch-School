@@ -1,0 +1,39 @@
+Hi Mark,
+
+I would like to be sure you are familiar with some specific techniques in DBIx::Class.  So I'd like to see you build out a simple schema and write some examples to do the following.
+
+    Start a new project with a DBIx::Class schema named School::Schema
+    Add some result source classes:
+        School::Schema::Result::Student
+        School::Schema::Result::Class
+        School::Schema::Result::StudentClass
+        School::Schema::Result::Assignment
+        School::Schema::Result::Grade
+    Add some fields that make sense (use your imagination :)
+    Add some relationships that make sense, for example:
+        Student has_many student_classes
+        Student many_to_many classes
+        Student has_many grades
+        Assignment belongs_to class
+        Assignment has_many grades
+        Grade belongs_to assignment
+        Grade belongs_to student
+        Class has_many assignments
+        Class many_to_many students
+    Do a simple deploy to a postgres db with $schema->deploy
+    Use the $schema->resultset()->populate() method to add data to the schema
+        Explain difference between populate in list and void context
+        Turn on tracing for DBIx::Class to watch the queries being run
+    Fetch data that was populated
+        Experiment with fetching students
+        Prefetch their grades
+        Prefetch their grades and assignment the grade is from
+        Prefetch their grades and assignment the grade is from and class the assignment is from
+
+So have some fun working on this.  Build it up in a git repo so you can share it and I can see what you're building.  Again, just use your imagination to make this up.  I just want to get a sample Schema built up so you are able to try out some techniques.
+
+Thanks,
+
+Steve Nolte |  StreetLinks Lender Solutions | LenderX Dev Team Lead 
+501 W. Michigan Street, Milwaukee, WI  53203 
+p: 1.888.521.2790 x2305467 | e: steve.nolte@streetlinks.com | www.streetlinks.com 
