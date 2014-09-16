@@ -19,7 +19,7 @@ __PACKAGE__->add_columns(
         is_numeric        => 0,
         is_nullable       => 0,
     },
-    order => {
+    grade_order => {
         data_type         => 'integer',
         is_numeric        => 1,
         is_nullable       => 0,
@@ -37,7 +37,7 @@ __PACKAGE__->has_many(students => 'School::Schema::Result::Student', 'grade_leve
 
 =over 4
 
-=item * 'order' is so you can display 'Preschool, Kindergarten, 1st ...'
+=item * 'grade_order' is so you can display 'Preschool, Kindergarten, 1st ...'
 
 =back
 
