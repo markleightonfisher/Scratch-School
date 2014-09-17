@@ -1,0 +1,14 @@
+Void context for populate() (i.e. ignoring any return value) skips calling
+any augmentation methods for the new() and insert() call So, if you use
+such augmentation methods (like generating special primary keys rather than
+using autoincrement), those primary key fields will end up as undef (I
+think).
+
+Calling populate while keeping the return value (which will be a
+list-context call) means that any augmentation routines will be called
+normally.
+
+If you are not using augmentation routines, AND you are ignoring the
+return value anyway, you probably might as well call populate in void
+context (thereby avoiding retrieving the return value only to throw
+it away).
