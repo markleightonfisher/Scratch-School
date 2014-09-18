@@ -8,11 +8,10 @@ use strict;
 
 __PACKAGE__->table('student');
 __PACKAGE__->add_columns(
-    id => {
-        data_type         => 'integer',
+    student_id => {
+        data_type         => 'serial',
         is_nullable       => 0,
         is_numeric        => 1,
-        is_auto_increment => 1,
     },
     name => {
         data_type         => 'text',
@@ -37,16 +36,23 @@ __PACKAGE__->add_columns(
         is_foreign_key    => 1,
     },
 );
-__PACKAGE__->set_primary_key('id');
-__PACKAGE__->belongs_to(grade_levels => 'School::Schema::Result::GradeLevel', 'grade_level_id');
+
+__PACKAGE__->set_primary_key('student_id');
+
+__PACKAGE__->belongs_to(
+    grade_levels => 'School::Schema::Result::GradeLevel',
+    { 'foreign.grade_level_id' => 'self.grade_level_id' }
+);
+
 __PACKAGE__->has_many(
     student_assignments => 'School::Schema::Result::StudentAssignment',
-    'student_id'
+    { 'foreign.student_id' => 'self.student_id' }
 );
 __PACKAGE__->has_many(
     student_classes => 'School::Schema::Result::StudentClass',
-    'student_id'
+    { 'foreign.student_id' => 'self.student_id' }
 );
+
 __PACKAGE__->many_to_many( assignments => 'student_assignments', 'assignment_id');
 __PACKAGE__->many_to_many( classes     => 'student_classes',     'class_id');
 

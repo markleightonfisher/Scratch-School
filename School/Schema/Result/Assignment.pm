@@ -8,11 +8,10 @@ use strict;
 
 __PACKAGE__->table('assignment');
 __PACKAGE__->add_columns(
-    id => {
-        data_type         => 'integer',
+    assignment_id => {
+        data_type         => 'serial',
         is_nullable       => 0,
         is_numeric        => 1,
-        is_auto_increment => 1,
     },
     name => {
         data_type         => 'text',
@@ -20,13 +19,13 @@ __PACKAGE__->add_columns(
         is_nullable       => 0,
     },
     date_assigned => {
-        data_type         => 'timestamp',
+        data_type         => 'timestamp with time zone',
         is_numeric        => 0,
         is_nullable       => 0,
         default_value     => \'now()',
     },
     date_due => {
-        data_type         => 'timestamp',
+        data_type         => 'timestamp with time zone',
         is_numeric        => 0,
         is_nullable       => 0,
         default_value     => \'now()',
@@ -43,11 +42,14 @@ __PACKAGE__->add_columns(
         is_nullable       => 0,
     },
 );
-__PACKAGE__->set_primary_key('id');
+
+__PACKAGE__->set_primary_key('assignment_id');
+
 __PACKAGE__->has_many(
     student_assignments => 'School::Schema::Result::StudentAssignment',
-    'assignment_id'
+    { 'foreign.assignment_id' => 'self.assignment_id' }
 );
+
 __PACKAGE__->many_to_many(students => 'student_assignments', 'student_id');
 
 1;

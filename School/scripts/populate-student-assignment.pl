@@ -11,7 +11,7 @@ use School::Schema;
 my $schema = School::Schema->connect("dbi:Pg:dbname=Scratch-School");
 
 $schema->resultset('StudentAssignment')->populate([
-    [qw( student_id assignment_id grade_id )],
+    [qw( student_id assignment_id grade )],
     [  1,  1, 97 ],
     [  2,  1, 75 ],
     [  3,  2, 83 ],

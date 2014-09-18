@@ -1,0 +1,21 @@
+Excellent, good to see the school example progress.
+
+Here are some team conventions I'd like to see you follow:
+
+    table names are singular, which you're already doing
+    never give a relationship the same name as a column (it's valid but very confusing)
+    name foreign keys same as primary keys of foreign table
+        prefix with an adjective if duplicates
+        e.g. we have standard create_user_id and last_mod_user_id columns
+    primary keys are prefixed with table name, e.g. assignment_id
+    auto incrementing PKs should be of type serial (PostgreSQL will do the rest)
+    use timestamp with time zone for timestamps (still gets stored as UTC but seeing the TZ is nice)
+    define relationships using a HASH
+        Not for performance reasons, it's just more explicit and easier to understand
+        e.g. has_many student_assignments ... { 'foreign.assignment_id' => 'self.assignment_id' }
+
+Thanks,
+
+Steve Nolte |  StreetLinks Lender Solutions | LenderX Dev Team Lead 
+501 W. Michigan Street, Milwaukee, WI  53203 
+p: 1.888.521.2790 x2305467 | e: steve.nolte@streetlinks.com | www.streetlinks.com 

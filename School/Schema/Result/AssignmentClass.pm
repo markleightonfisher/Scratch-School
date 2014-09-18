@@ -21,9 +21,17 @@ __PACKAGE__->add_columns(
         is_foreign_key    => 1,
     },
 );
+
 __PACKAGE__->set_primary_key(qw( assignment_id class_id ));
-__PACKAGE__->belongs_to(class_id      => 'School::Schema::Result::Class');
-__PACKAGE__->belongs_to(assignment_id => 'School::Schema::Result::Assignment');
+
+__PACKAGE__->belongs_to(
+    class_id => 'School::Schema::Result::Class',
+    { 'foreign.class_id' => 'self.class_id' }
+);
+__PACKAGE__->belongs_to(
+    assignment_id => 'School::Schema::Result::Assignment',
+    { 'foreign.assignment_id' => 'self.assignment_id' }
+);
 
 1;
 

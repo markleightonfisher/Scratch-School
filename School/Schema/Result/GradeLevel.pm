@@ -8,11 +8,10 @@ use strict;
 
 __PACKAGE__->table('grade_level');
 __PACKAGE__->add_columns(
-    id => {
-        data_type         => 'integer',
+    grade_level_id => {
+        data_type         => 'serial',
         is_nullable       => 0,
         is_numeric        => 1,
-        is_auto_increment => 1,
     },
     name => {
         data_type         => 'text',
@@ -25,9 +24,18 @@ __PACKAGE__->add_columns(
         is_nullable       => 0,
     },
 );
-__PACKAGE__->set_primary_key('id');
-__PACKAGE__->has_many(classes  => 'School::Schema::Result::Class',   'grade_level_id');
-__PACKAGE__->has_many(students => 'School::Schema::Result::Student', 'grade_level_id');
+
+__PACKAGE__->set_primary_key('grade_level_id');
+
+__PACKAGE__->has_many(
+    classes => 'School::Schema::Result::Class',
+    { 'foreign.grade_level_id' => 'self.grade_level_id' }
+);
+
+__PACKAGE__->has_many(
+    students => 'School::Schema::Result::Student',
+    { 'foreign.grade_level_id' => 'self.grade_level_id' }
+);
 
 1;
 
